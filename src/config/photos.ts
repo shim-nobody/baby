@@ -9,63 +9,82 @@ import photo5 from 'C:/Users/Admin/.gemini/antigravity/brain/71066aa7-597d-4cb8-
 import photo6 from 'C:/Users/Admin/.gemini/antigravity/brain/71066aa7-597d-4cb8-8a4e-ceb421e21784/.user_uploaded/media_1795478808587_a80f2c89.jpg';
 import photo7 from 'C:/Users/Admin/.gemini/antigravity/brain/71066aa7-597d-4cb8-8a4e-ceb421e21784/.user_uploaded/media_1795478808629_981aa994.jpg';
 
-export interface PhotoItem {
+export interface PhotoEntry {
   id: number;
   src: string;
   caption: string;
   date?: string;
   location?: string;
+  category?: string;
+  order?: number;
+  note?: string;
 }
 
-export const photos: PhotoItem[] = [
+export type PhotoItem = PhotoEntry;
+
+export const photos: PhotoEntry[] = [
   {
     id: 1,
     src: photo1,
     caption: "Resting on your shoulder, holding your arm.",
     date: "Every sweet moment",
-    location: "My safest place"
+    location: "My safest place",
+    category: "Sweet Moments",
+    order: 1,
   },
   {
     id: 2,
     src: photo2,
     caption: "Stealing my cap and flashing peace signs.",
     date: "Late night video calls",
-    location: "Miles apart, close at heart"
+    location: "Miles apart, close at heart",
+    category: "Video Calls",
+    order: 2,
   },
   {
     id: 3,
     src: photo3,
     caption: "Our chaotic skincare routine together.",
     date: "Face mask night",
-    location: "Our silly happiness"
+    location: "Our silly happiness",
+    category: "Video Calls",
+    order: 3,
   },
   {
     id: 4,
     src: photo4,
     caption: "Leaning on you in quiet comfort.",
     date: "Month 1 & forever",
-    location: "Beside each other"
+    location: "Beside each other",
+    category: "Sweet Moments",
+    order: 4,
   },
   {
     id: 5,
     src: photo5,
     caption: "Train journeys and silly smiles with you.",
     date: "Our travel adventures",
-    location: "On the train together"
+    location: "On the train together",
+    category: "Adventures",
+    order: 5,
   },
   {
     id: 6,
     src: photo6,
     caption: "Lazy sweet afternoons and your radiant smile.",
     date: "Quiet afternoon dates",
-    location: "Just you and me"
+    location: "Just you and me",
+    category: "Sweet Moments",
+    order: 6,
   },
   {
     id: 7,
     src: photo7,
     caption: "Our mirror selfie under the archway.",
     date: "Hackathon & College days",
-    location: "Always side by side"
+    location: "Always side by side",
+    category: "College & Hackathons",
+    order: 7,
   },
 ];
 

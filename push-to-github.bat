@@ -7,7 +7,6 @@ echo   Pushing "The Universe Where I Found You" to GitHub
 echo ============================================================
 echo.
 
-git init
 git remote add origin https://github.com/shim-nobody/baby.git 2>nul
 git remote set-url origin https://github.com/shim-nobody/baby.git
 
@@ -19,7 +18,7 @@ git status
 echo.
 
 echo 3. Creating Commit...
-git commit -m "Happy Two Months My Baby - Our Little Universe"
+git commit -m "Fix all Vercel deployment TypeScript errors - Happy Two Months My Baby"
 
 echo 4. Setting branch to main...
 git branch -M main
@@ -32,4 +31,3 @@ echo ============================================================
 echo   Done! Check https://github.com/shim-nobody/baby
 echo ============================================================
 pause
-

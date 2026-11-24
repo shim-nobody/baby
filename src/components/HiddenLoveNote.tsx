@@ -16,7 +16,7 @@ export function HiddenLoveNote({ icon, message, color, style }: HiddenLoveNotePr
     <div className="relative" style={style}>
       {/* Trigger button */}
       <motion.button
-        onClick={() => setRevealed((r) => !r)}
+        onClick={() => setRevealed((r: boolean) => !r)}
         className="relative text-2xl select-none cursor-pointer border-none bg-transparent p-0"
         whileHover={{ scale: 1.3, rotate: 15 }}
         whileTap={{ scale: 0.85 }}
@@ -75,4 +75,3 @@ export function HiddenLoveNote({ icon, message, color, style }: HiddenLoveNotePr
     </div>
   );
 }
-

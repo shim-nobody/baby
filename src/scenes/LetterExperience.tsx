@@ -27,10 +27,10 @@ export function LetterExperience({ onComplete, startChapter = 0, endChapter }: L
   const goNext = () => {
     if (pageIndex < totalPages - 1) {
       setDirection(1);
-      setPageIndex((p) => p + 1);
+      setPageIndex((p: number) => p + 1);
     } else if (chapterIndex < slicedChapters.length - 1) {
       setDirection(1);
-      setChapterIndex((c) => c + 1);
+      setChapterIndex((c: number) => c + 1);
       setPageIndex(0);
     } else {
       onComplete();
@@ -40,11 +40,11 @@ export function LetterExperience({ onComplete, startChapter = 0, endChapter }: L
   const goPrev = () => {
     if (pageIndex > 0) {
       setDirection(-1);
-      setPageIndex((p) => p - 1);
+      setPageIndex((p: number) => p - 1);
     } else if (chapterIndex > 0) {
       setDirection(-1);
       const prevChapter = slicedChapters[chapterIndex - 1];
-      setChapterIndex((c) => c - 1);
+      setChapterIndex((c: number) => c - 1);
       setPageIndex(prevChapter.pages.length - 1);
     }
   };

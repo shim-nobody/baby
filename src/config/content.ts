@@ -201,3 +201,84 @@ export const finaleCelebration = {
   finalVow: "If I could choose my favourite part of these two months, it would always be you.",
   buttonLabel: "Explore Our Universe Again",
 };
+
+// ============================================================================
+// Scrapbook / Scene compatibility exports (required by LetterPage, LetterScene, LetterExperience, MemoryAlbumScene)
+// ============================================================================
+
+export interface Chapter {
+  id: number;
+  title: string;
+  subtitle?: string;
+  locationLabel?: string;
+  paragraphs: string[];
+  pages: string[][];
+  emoji?: string;
+  decorativeEmoji?: string;
+  quote?: string;
+}
+
+export const chapters: Chapter[] = storyChapters.map((ch, idx) => {
+  const emojis = ['🏡', '🌸', '🌉', '🌿', '🌊', '✨', '🌙'];
+  const emoji = emojis[idx] ?? '✨';
+  return {
+    id: ch.id,
+    title: ch.title,
+    subtitle: ch.subtitle,
+    locationLabel: ch.locationLabel,
+    paragraphs: ch.paragraphs,
+    pages: [ch.paragraphs],
+    emoji,
+    decorativeEmoji: emoji,
+    quote: ch.quoteHighlight,
+  };
+});
+
+export interface HiddenNote {
+  id: number;
+  icon: string;
+  message: string;
+  color: string;
+}
+
+export const hiddenNotes: HiddenNote[] = [
+  {
+    id: 1,
+    icon: "🌸",
+    message: "You have the sweetest smile, Chubby.",
+    color: "#E9789C",
+  },
+  {
+    id: 2,
+    icon: "💌",
+    message: "Thank you for standing beside me when things were hard.",
+    color: "#C45C7A",
+  },
+  {
+    id: 3,
+    icon: "⭐",
+    message: "You turned my quiet world into something magical.",
+    color: "#D4AF76",
+  },
+  {
+    id: 4,
+    icon: "🧸",
+    message: "I love being your little baby, and your Captain.",
+    color: "#E88D67",
+  },
+  {
+    id: 5,
+    icon: "💖",
+    message: "Happy two months, Saba. Shim loves you endlessly.",
+    color: "#9A783A",
+  },
+];
+
+export const photoAlbumTitle = "Our Memory Constellation";
+export const photoAlbumSubtitle = "Every picture reminds me of another reason I'm grateful for you.";
+export const photoCategories = [
+  "Sweet Moments",
+  "Video Calls",
+  "Adventures",
+  "College & Hackathons",
+];

@@ -17,7 +17,7 @@ export function LetterScene({ onFinishLetter, onBackToUniverse }: Props) {
 
   const handleNext = () => {
     if (currentChapter < chapters.length - 1) {
-      setCurrentChapter(prev => prev + 1);
+      setCurrentChapter((prev: number) => prev + 1);
     } else {
       onFinishLetter();
     }
@@ -25,7 +25,7 @@ export function LetterScene({ onFinishLetter, onBackToUniverse }: Props) {
 
   const handlePrev = () => {
     if (currentChapter > 0) {
-      setCurrentChapter(prev => prev - 1);
+      setCurrentChapter((prev: number) => prev - 1);
     }
   };
 
@@ -155,4 +155,3 @@ export function LetterScene({ onFinishLetter, onBackToUniverse }: Props) {
     </div>
   );
 }
-

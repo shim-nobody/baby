@@ -38,11 +38,11 @@ export function MemoryAlbumScene({ onNext, onPrev }: MemoryAlbumSceneProps) {
 
   const prevPhoto = () => {
     if (viewerIndex === null) return;
-    setViewerIndex((i) => (i! > 0 ? i! - 1 : filtered.length - 1));
+    setViewerIndex((i: number | null) => (i !== null && i > 0 ? i - 1 : filtered.length - 1));
   };
   const nextPhoto = () => {
     if (viewerIndex === null) return;
-    setViewerIndex((i) => (i! < filtered.length - 1 ? i! + 1 : 0));
+    setViewerIndex((i: number | null) => (i !== null && i < filtered.length - 1 ? i + 1 : 0));
   };
 
   return (
@@ -150,7 +150,7 @@ export function MemoryAlbumScene({ onNext, onPrev }: MemoryAlbumSceneProps) {
         {totalGalleryPages > 1 && (
           <div className="flex justify-center gap-3 pb-4">
             <button
-              onClick={() => setGalleryPage((p) => Math.max(0, p - 1))}
+              onClick={() => setGalleryPage((p: number) => Math.max(0, p - 1))}
               disabled={galleryPage === 0}
               className="px-4 py-1.5 rounded-full font-dm text-xs disabled:opacity-30"
               style={{ background: '#F8C8DC', color: '#C45C7A' }}
@@ -161,7 +161,7 @@ export function MemoryAlbumScene({ onNext, onPrev }: MemoryAlbumSceneProps) {
               {galleryPage + 1} / {totalGalleryPages}
             </span>
             <button
-              onClick={() => setGalleryPage((p) => Math.min(totalGalleryPages - 1, p + 1))}
+              onClick={() => setGalleryPage((p: number) => Math.min(totalGalleryPages - 1, p + 1))}
               disabled={galleryPage === totalGalleryPages - 1}
               className="px-4 py-1.5 rounded-full font-dm text-xs disabled:opacity-30"
               style={{ background: '#F8C8DC', color: '#C45C7A' }}
@@ -211,4 +211,3 @@ export function MemoryAlbumScene({ onNext, onPrev }: MemoryAlbumSceneProps) {
     </div>
   );
 }
-
