@@ -1,6 +1,7 @@
 // src/components/3d/WaterfallAndPond3D.tsx — Animated Cascading Waterfall and Mountain Pond
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
+import { useCursor } from '@react-three/drei';
 import * as THREE from 'three';
 
 interface Props {
@@ -12,6 +13,8 @@ export function WaterfallAndPond3D({ onSelectWaterfall, isHovered }: Props) {
   const waterfallMeshRef = useRef<THREE.Mesh>(null);
   const pondMeshRef = useRef<THREE.Mesh>(null);
   const splashRef = useRef<THREE.Mesh>(null);
+  const [hovered, setHovered] = useState(false);
+  useCursor(hovered && Boolean(onSelectWaterfall));
 
   // Animated water shimmer & flow
   useFrame((state) => {
@@ -80,7 +83,8 @@ export function WaterfallAndPond3D({ onSelectWaterfall, isHovered }: Props) {
         position={[-3.2, 1.6, 0.4]}
         rotation={[0, 0.15, 0.08]}
         onClick={onSelectWaterfall}
-        cursor={onSelectWaterfall ? 'pointer' : undefined}
+        onPointerOver={onSelectWaterfall ? (e) => { e.stopPropagation(); setHovered(true); } : undefined}
+        onPointerOut={onSelectWaterfall ? () => setHovered(false) : undefined}
       >
         {/* Waterfall water stream curtain */}
         <mesh ref={waterfallMeshRef} castShadow material={materials.waterfall}>

@@ -1,5 +1,6 @@
 // src/components/3d/RopeBridge3D.tsx — Suspended Wooden Plank Rope Bridge
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
+import { useCursor } from '@react-three/drei';
 import * as THREE from 'three';
 
 interface Props {
@@ -19,6 +20,9 @@ export function RopeBridge3D({
   onSelect,
   isHovered,
 }: Props) {
+  const [hovered, setHovered] = useState(false);
+  useCursor(hovered && Boolean(onSelect));
+
   const materials = useMemo(() => {
     return {
       woodPlank: new THREE.MeshStandardMaterial({
@@ -64,7 +68,11 @@ export function RopeBridge3D({
   }, [start, end, planksCount, sag]);
 
   return (
-    <group onClick={onSelect} cursor={onSelect ? 'pointer' : undefined}>
+    <group
+      onClick={onSelect}
+      onPointerOver={onSelect ? (e) => { e.stopPropagation(); setHovered(true); } : undefined}
+      onPointerOut={onSelect ? () => setHovered(false) : undefined}
+    >
       {/* Wooden Steps / Planks */}
       {planks.map((p, idx) => (
         <mesh
@@ -91,4 +99,3 @@ export function RopeBridge3D({
     </group>
   );
 }
-

@@ -1,6 +1,7 @@
 // src/components/3d/HeartGarden3D.tsx — Botanical Heart Garden & Handkerchief Table
-import { useMemo, useRef } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
+import { useCursor } from '@react-three/drei';
 import * as THREE from 'three';
 
 interface Props {
@@ -9,6 +10,9 @@ interface Props {
 }
 
 export function HeartGarden3D({ onSelectGarden, isHovered }: Props) {
+  const [hovered, setHovered] = useState(false);
+  useCursor(hovered && Boolean(onSelectGarden));
+
   const flowerGroupRef = useRef<THREE.Group>(null);
 
   // Soft breathing glow of rose flowers
@@ -57,7 +61,8 @@ export function HeartGarden3D({ onSelectGarden, isHovered }: Props) {
     <group
       position={[2.4, 0.9, 0.4]}
       onClick={onSelectGarden}
-      cursor={onSelectGarden ? 'pointer' : undefined}
+      onPointerOver={onSelectGarden ? (e) => { e.stopPropagation(); setHovered(true); } : undefined}
+      onPointerOut={onSelectGarden ? () => setHovered(false) : undefined}
     >
       {/* ── 1. RAISED BOTANICAL FLOWERBED BORDER ── */}
       <mesh position={[0, 0.1, 0]} castShadow receiveShadow material={materials.stoneBorder}>
@@ -107,4 +112,3 @@ export function HeartGarden3D({ onSelectGarden, isHovered }: Props) {
     </group>
   );
 }
-

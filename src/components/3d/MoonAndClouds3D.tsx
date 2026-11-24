@@ -1,6 +1,7 @@
 // src/components/3d/MoonAndClouds3D.tsx — Glowing 3D Moon and Drifting Clouds
-import { useMemo, useRef } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
+import { useCursor } from '@react-three/drei';
 import * as THREE from 'three';
 
 interface Props {
@@ -11,6 +12,8 @@ interface Props {
 export function MoonAndClouds3D({ onSelectMoon, isHovered }: Props) {
   const moonRef = useRef<THREE.Group>(null);
   const cloudsRef = useRef<THREE.Group>(null);
+  const [hovered, setHovered] = useState(false);
+  useCursor(hovered && Boolean(onSelectMoon));
 
   // Soft rotation and cloud drift
   useFrame((state) => {
@@ -55,7 +58,8 @@ export function MoonAndClouds3D({ onSelectMoon, isHovered }: Props) {
         ref={moonRef}
         position={[9.5, 8.5, -6]}
         onClick={onSelectMoon}
-        cursor={onSelectMoon ? 'pointer' : undefined}
+        onPointerOver={onSelectMoon ? (e) => { e.stopPropagation(); setHovered(true); } : undefined}
+        onPointerOut={onSelectMoon ? () => setHovered(false) : undefined}
       >
         {/* Main Moon Sphere */}
         <mesh castShadow material={materials.moonGlow}>

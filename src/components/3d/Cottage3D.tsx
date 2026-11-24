@@ -1,6 +1,7 @@
 // src/components/3d/Cottage3D.tsx — Two-Story Japanese Romantic Cottage (Inspired by Reference Image 1)
-import { useMemo, useRef } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
+import { useCursor } from '@react-three/drei';
 import * as THREE from 'three';
 
 interface Props {
@@ -9,6 +10,9 @@ interface Props {
 }
 
 export function Cottage3D({ onSelect, isHovered }: Props) {
+  const [hovered, setHovered] = useState(false);
+  useCursor(hovered && Boolean(onSelect));
+
   const lightRef = useRef<THREE.PointLight>(null);
 
   // Gentle flickering of the warm interior candle/lantern light
@@ -68,7 +72,8 @@ export function Cottage3D({ onSelect, isHovered }: Props) {
       position={[-0.8, 1.9, -1.2]}
       rotation={[0, 0.32, 0]}
       onClick={onSelect}
-      cursor={onSelect ? 'pointer' : undefined}
+      onPointerOver={onSelect ? (e) => { e.stopPropagation(); setHovered(true); } : undefined}
+      onPointerOut={onSelect ? () => setHovered(false) : undefined}
     >
       {/* ── 1. GROUND FLOOR BASE & VERANDA DECK ── */}
       {/* Raised wooden deck */}
@@ -187,4 +192,3 @@ export function Cottage3D({ onSelect, isHovered }: Props) {
     </group>
   );
 }
-

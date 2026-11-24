@@ -1,6 +1,7 @@
 // src/components/3d/HeartVault3D.tsx — Floating Crystalline Glass Heart Vault
-import { useMemo, useRef } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
+import { useCursor } from '@react-three/drei';
 import * as THREE from 'three';
 
 interface Props {
@@ -9,6 +10,9 @@ interface Props {
 }
 
 export function HeartVault3D({ onSelectVault, isHovered }: Props) {
+  const [hovered, setHovered] = useState(false);
+  useCursor(hovered && Boolean(onSelectVault));
+
   const heartGroupRef = useRef<THREE.Group>(null);
   const ring1Ref = useRef<THREE.Mesh>(null);
   const ring2Ref = useRef<THREE.Mesh>(null);
@@ -61,7 +65,8 @@ export function HeartVault3D({ onSelectVault, isHovered }: Props) {
       ref={heartGroupRef}
       position={[-0.4, 5.2, 0.2]}
       onClick={onSelectVault}
-      cursor={onSelectVault ? 'pointer' : undefined}
+      onPointerOver={onSelectVault ? (e) => { e.stopPropagation(); setHovered(true); } : undefined}
+      onPointerOut={onSelectVault ? () => setHovered(false) : undefined}
     >
       {/* ── 1. FLOATING CRYSTALLINE HEART SHAPE ── */}
       {/* Left sphere lobe */}
@@ -101,4 +106,3 @@ export function HeartVault3D({ onSelectVault, isHovered }: Props) {
     </group>
   );
 }
-

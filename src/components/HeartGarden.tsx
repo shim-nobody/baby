@@ -61,9 +61,17 @@ export function HeartGarden({ onComplete, onSkip, alreadyDone }: Props) {
         transition={{ type: 'spring', stiffness: 150 }}
       >
         <div className="text-7xl mb-6 select-none" style={{ filter: 'drop-shadow(0 0 20px #F59ABB)' }}>💗</div>
-        <h2 className="font-playfair text-3xl italic mb-4" style={{ color: '#F59ABB' }}>
-          {heartGardenComplete}
+        <h2 className="font-playfair text-3xl italic mb-3" style={{ color: '#F59ABB' }}>
+          {heartGardenComplete.title}
         </h2>
+        <p className="font-dm text-sm mb-2" style={{ color: 'rgba(248,246,255,0.85)', lineHeight: 1.6 }}>
+          {heartGardenComplete.message}
+        </p>
+        {heartGardenComplete.quote && (
+          <p className="font-playfair italic text-xs mb-4" style={{ color: '#D4AF76' }}>
+            "{heartGardenComplete.quote}"
+          </p>
+        )}
         <div className="flex justify-center gap-2 mb-6">
           {heartMessages.map((_, i) => (
             <motion.span key={i} className="text-2xl" initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: i * 0.1 }}>💗</motion.span>

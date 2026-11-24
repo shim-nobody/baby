@@ -1,6 +1,7 @@
 // src/components/3d/CherryBlossomTree3D.tsx — Lush Volumetric Cherry Blossom Tree (Inspired by Reference Image 1)
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
+import { useCursor } from '@react-three/drei';
 import * as THREE from 'three';
 
 interface Props {
@@ -18,6 +19,9 @@ export function CherryBlossomTree3D({
   onSelect,
   isHovered,
 }: Props) {
+  const [hovered, setHovered] = useState(false);
+  useCursor(hovered && Boolean(onSelect));
+
   const canopyRef = useRef<THREE.Group>(null);
 
   // Subtle wind sway animation
@@ -67,7 +71,8 @@ export function CherryBlossomTree3D({
       scale={scale}
       rotation={[0, rotationY, 0]}
       onClick={onSelect}
-      cursor={onSelect ? 'pointer' : undefined}
+      onPointerOver={onSelect ? (e) => { e.stopPropagation(); setHovered(true); } : undefined}
+      onPointerOut={onSelect ? () => setHovered(false) : undefined}
     >
       {/* ── 1. ORGANIC TWISTED WOODEN TRUNK & BRANCHES ── */}
       {/* Base root flair */}
@@ -139,4 +144,3 @@ export function CherryBlossomTree3D({
     </group>
   );
 }
-

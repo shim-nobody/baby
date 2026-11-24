@@ -1,5 +1,6 @@
 // src/components/3d/SatelliteIsland3D.tsx — Satellite Floating Islands with Waterfalls, Trees & Cottages
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
+import { useCursor } from '@react-three/drei';
 import * as THREE from 'three';
 import { OrganicIslandMesh } from './OrganicIslandMesh';
 import { RealisticWaterfall3D } from './RealisticWaterfall3D';
@@ -31,6 +32,9 @@ export function SatelliteIsland3D({
   isHovered,
   seed = 2,
 }: Props) {
+  const [hovered, setHovered] = useState(false);
+  useCursor(hovered && Boolean(onSelect));
+
   const materials = useMemo(() => {
     return {
       glowingWindow: new THREE.MeshStandardMaterial({
@@ -51,7 +55,8 @@ export function SatelliteIsland3D({
       scale={scale}
       rotation={[0, rotationY, 0]}
       onClick={onSelect}
-      cursor={onSelect ? 'pointer' : undefined}
+      onPointerOver={onSelect ? (e) => { e.stopPropagation(); setHovered(true); } : undefined}
+      onPointerOut={onSelect ? () => setHovered(false) : undefined}
     >
       {/* ── 1. PROCEDURALLY SCULPTED ORGANIC SATELLITE ISLAND ── */}
       <OrganicIslandMesh

@@ -140,8 +140,8 @@ export function FairiesAndButterflies3D() {
             <mesh position={[0.35, 0, 0]} rotation={[0, -0.4, 0]} material={materials.butterflyGold}>
               <boxGeometry args={[0.6, 0.04, 0.45]} />
             </mesh>
-            <mesh material={materials.butterflyGold}>
-              <cylinderGeometry args={[0.06, 0.06, 0.4, 4]} rotation={[Math.PI / 2, 0, 0]} />
+            <mesh rotation={[Math.PI / 2, 0, 0]} material={materials.butterflyGold}>
+              <cylinderGeometry args={[0.06, 0.06, 0.4, 4]} />
             </mesh>
           </group>
         ))}
@@ -149,4 +149,3 @@ export function FairiesAndButterflies3D() {
     </group>
   );
 }
-

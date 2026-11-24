@@ -1,5 +1,6 @@
 // src/components/3d/LotusFlowers3D.tsx — Realistic Curved Petal Lotus Blossoms & Lilypads
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
+import { useCursor } from '@react-three/drei';
 import * as THREE from 'three';
 
 export interface FlowerProps {
@@ -42,6 +43,9 @@ export function LotusFlowers3D({
   onSelect,
   isHovered,
 }: FlowerProps) {
+  const [hovered, setHovered] = useState(false);
+  useCursor(hovered && Boolean(onSelect));
+
   const chosenType = colorType || type || 'pink';
 
   const materials = useMemo(() => {
@@ -91,7 +95,8 @@ export function LotusFlowers3D({
       scale={scale}
       rotation={[0, rotationY, 0]}
       onClick={onSelect}
-      cursor={onSelect ? 'pointer' : undefined}
+      onPointerOver={onSelect ? (e) => { e.stopPropagation(); setHovered(true); } : undefined}
+      onPointerOut={onSelect ? () => setHovered(false) : undefined}
     >
       {/* ── 1. CIRCULAR LILYPAD LEAF BASE ── */}
       <mesh position={[0, 0.02, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow material={materials.lilypad}>

@@ -1,7 +1,8 @@
 // src/components/3d/DoubleMoonsAndSky3D.tsx — Two Luminous Moons & Dreamy Clouds
 // Matched directly to the reference image artwork
-import { useMemo, useRef } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
+import { useCursor } from '@react-three/drei';
 import * as THREE from 'three';
 
 interface Props {
@@ -10,6 +11,9 @@ interface Props {
 }
 
 export function DoubleMoonsAndSky3D({ onSelectMoon, isHovered }: Props) {
+  const [hovered, setHovered] = useState(false);
+  useCursor(hovered && Boolean(onSelectMoon));
+
   const leftMoonRef = useRef<THREE.Group>(null);
   const rightMoonRef = useRef<THREE.Group>(null);
   const cloudsRef = useRef<THREE.Group>(null);
@@ -72,7 +76,8 @@ export function DoubleMoonsAndSky3D({ onSelectMoon, isHovered }: Props) {
         ref={leftMoonRef}
         position={[-6.2, 7.5, -9]}
         onClick={onSelectMoon}
-        cursor={onSelectMoon ? 'pointer' : undefined}
+        onPointerOver={onSelectMoon ? (e) => { e.stopPropagation(); setHovered(true); } : undefined}
+        onPointerOut={onSelectMoon ? () => setHovered(false) : undefined}
       >
         <mesh castShadow material={materials.moonLeftGlow}>
           <sphereGeometry args={[2.8, 32, 32]} />
@@ -97,7 +102,8 @@ export function DoubleMoonsAndSky3D({ onSelectMoon, isHovered }: Props) {
         ref={rightMoonRef}
         position={[6.8, 8.2, -8.5]}
         onClick={onSelectMoon}
-        cursor={onSelectMoon ? 'pointer' : undefined}
+        onPointerOver={onSelectMoon ? (e) => { e.stopPropagation(); setHovered(true); } : undefined}
+        onPointerOut={onSelectMoon ? () => setHovered(false) : undefined}
       >
         <mesh castShadow material={materials.moonRightGlow}>
           <sphereGeometry args={[1.9, 28, 28]} />
@@ -157,4 +163,3 @@ export function DoubleMoonsAndSky3D({ onSelectMoon, isHovered }: Props) {
     </group>
   );
 }
-

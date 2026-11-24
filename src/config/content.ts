@@ -282,3 +282,38 @@ export const photoCategories = [
   "Adventures",
   "College & Hackathons",
 ];
+
+// Landmark & Feature specific compatibility exports
+export const heartMessages: string[] = [
+  "You are the sweetest part of my every single day.",
+  "Your smile caught my eyes under that tree, and caught my heart forever.",
+  "Thank you for wiping my hands at the hackathon, and holding my heart since.",
+  "When you stood beside me, I knew I was never alone again.",
+  "I love being your little baby, and I love being your Captain.",
+  "Every star in our sky shines a little brighter because of you.",
+  "Happy two months, my Chubby. Shim loves you endlessly.",
+];
+
+export const heartGardenComplete = {
+  title: "Garden in Full Bloom",
+  message: "Every flower bloomed because of your warmth, Saba. You brought colors into my world.",
+  quote: "Sometimes, love is simply someone noticing the little things.",
+};
+
+export const constellationTitle = "Our Memory Constellation";
+export const constellationSubtitle = "Every star in this sky is a moment I cherish with you, my Chubby.";
+
+export const bottleLines: string[] = [
+  "To the girl whose smile changed my whole world...",
+  "I wrote this little note and let it drift across our universe.",
+  "No matter how far the waves carry it, it will always say the same thing:",
+  "I am so grateful you chose to stand beside me.",
+  "Forever your Captain, Shim ♡",
+];
+
+export const moonMessages: string[] = [
+  "Look up at the moons with me, Baby.",
+  "Even when nights get cold or dark, you bring warmth and light to my soul.",
+  "Two stars finding their permanent place beside one another in the sky.",
+  "Every tomorrow is brighter because I get to spend it loving you.",
+];

@@ -1,6 +1,7 @@
 // src/components/3d/PagodaCottage3D.tsx — Curved-Eave Japanese Pagoda Fairy Cottage
-import { useMemo, useRef } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
+import { useCursor } from '@react-three/drei';
 import * as THREE from 'three';
 
 interface Props {
@@ -20,6 +21,9 @@ export function PagodaCottage3D({
   onSelect,
   isHovered,
 }: Props) {
+  const [hovered, setHovered] = useState(false);
+  useCursor(hovered && Boolean(onSelect));
+
   const doorLightRef = useRef<THREE.PointLight>(null);
   const lanternRef = useRef<THREE.Group>(null);
 
@@ -95,7 +99,8 @@ export function PagodaCottage3D({
       scale={scale}
       rotation={[0, rotationY, 0]}
       onClick={onSelect}
-      cursor={onSelect ? 'pointer' : undefined}
+      onPointerOver={onSelect ? (e) => { e.stopPropagation(); setHovered(true); } : undefined}
+      onPointerOut={onSelect ? () => setHovered(false) : undefined}
     >
       {/* ── 1. STONE FOUNDATION & STAIRS ── */}
       <mesh position={[0, 0.18, 0]} castShadow receiveShadow material={materials.stoneBase}>
@@ -154,11 +159,11 @@ export function PagodaCottage3D({
 
       {/* Round Gold Clock / Medallion above door */}
       <group position={[0, 1.7, (isCenter ? 2.2 : 1.6) / 2 + 0.05]}>
-        <mesh material={materials.goldFinial}>
-          <cylinderGeometry args={[0.24, 0.24, 0.05, 16]} rotation={[Math.PI / 2, 0, 0]} />
+        <mesh rotation={[Math.PI / 2, 0, 0]} material={materials.goldFinial}>
+          <cylinderGeometry args={[0.24, 0.24, 0.05, 16]} />
         </mesh>
-        <mesh position={[0, 0, 0.03]} material={materials.roofGoldTrim}>
-          <cylinderGeometry args={[0.18, 0.18, 0.04, 16]} rotation={[Math.PI / 2, 0, 0]} />
+        <mesh position={[0, 0, 0.03]} rotation={[Math.PI / 2, 0, 0]} material={materials.roofGoldTrim}>
+          <cylinderGeometry args={[0.18, 0.18, 0.04, 16]} />
         </mesh>
       </group>
 

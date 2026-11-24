@@ -62,12 +62,12 @@ export function EnchantedStorybookOpening({ onOpenUniverse }: Props) {
             stroke="url(#goldScriptGlow)"
             strokeWidth="5"
             strokeLinecap="round"
+            strokeDasharray={300}
             filter="url(#glowFilter)"
-            initial={{ pathLength: 0, opacity: 0 }}
+            initial={{ strokeDashoffset: 300, opacity: 0 }}
             animate={{
-              pathLength: [0, 1, 1],
+              strokeDashoffset: [300, 0, -60],
               opacity: [0.4, 0.95, 0.6],
-              strokeDashoffset: [0, -30, -60],
             }}
             transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
           />

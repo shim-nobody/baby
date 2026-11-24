@@ -89,3 +89,4 @@ export const photos: PhotoEntry[] = [
 ];
 
 export const finalePhoto = photo7;
+export const finalSurprisePhoto = finalePhoto;

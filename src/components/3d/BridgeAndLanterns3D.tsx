@@ -1,6 +1,7 @@
 // src/components/3d/BridgeAndLanterns3D.tsx — Arched Wooden Bridge & Stone Lanterns
-import { useMemo, useRef } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
+import { useCursor } from '@react-three/drei';
 import * as THREE from 'three';
 
 interface Props {
@@ -9,6 +10,9 @@ interface Props {
 }
 
 export function BridgeAndLanterns3D({ onSelectBridge, isHovered }: Props) {
+  const [hovered, setHovered] = useState(false);
+  useCursor(hovered && Boolean(onSelectBridge));
+
   const lanternLightRef = useRef<THREE.PointLight>(null);
 
   // Lantern flame flicker
@@ -48,7 +52,8 @@ export function BridgeAndLanterns3D({ onSelectBridge, isHovered }: Props) {
       position={[0.4, 0.5, 2.0]}
       rotation={[0, -0.28, 0]}
       onClick={onSelectBridge}
-      cursor={onSelectBridge ? 'pointer' : undefined}
+      onPointerOver={onSelectBridge ? (e) => { e.stopPropagation(); setHovered(true); } : undefined}
+      onPointerOut={onSelectBridge ? () => setHovered(false) : undefined}
     >
       {/* ── 1. ARCHED WOODEN FOOTBRIDGE ── */}
       {/* Arched bridge main span */}
@@ -107,4 +112,3 @@ export function BridgeAndLanterns3D({ onSelectBridge, isHovered }: Props) {
     </group>
   );
 }
-

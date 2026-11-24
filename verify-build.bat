@@ -1,38 +1,49 @@
 @echo off
-title Verify Captain Universe Production Build
+title Captain's Little Universe - TypeScript Audit and Production Build Verification
 cd /d "%~dp0"
 
-echo ============================================================
-echo   Running TypeScript Typecheck and Vite Production Build...
-echo ============================================================
+echo ======================================================================
+echo   CAPTAIN'S LITTLE UNIVERSE: PRODUCTION BUILD VERIFICATION
+echo ======================================================================
 echo.
 
-call npm run build
-
+echo [1/3] Running TypeScript Static Typecheck (npx tsc --noEmit)...
+echo ----------------------------------------------------------------------
+call npx tsc --noEmit
 if %ERRORLEVEL% NEQ 0 (
   echo.
-  echo [ERROR] Build failed with exit code %ERRORLEVEL%.
-  echo Please check the error messages above.
+  echo [ERROR] TypeScript compilation failed with exit code %ERRORLEVEL%.
+  echo Please review the errors printed above.
   echo.
   pause
   exit /b %ERRORLEVEL%
 )
-
+echo [SUCCESS] TypeScript typecheck passed with 0 errors!
 echo.
-echo ============================================================
-echo   Checking dist/ Output Directory...
-echo ============================================================
+
+echo [2/3] Running Full Production Build (npm run build)...
+echo ----------------------------------------------------------------------
+call npm run build
+if %ERRORLEVEL% NEQ 0 (
+  echo.
+  echo [ERROR] Production build failed with exit code %ERRORLEVEL%.
+  echo.
+  pause
+  exit /b %ERRORLEVEL%
+)
+echo [SUCCESS] Production build completed with exit code 0!
+echo.
+
+echo [3/3] Verifying Output Directory (dist/index.html)...
+echo ----------------------------------------------------------------------
 if exist dist\index.html (
-  echo [SUCCESS] dist/index.html was successfully generated!
-  echo [SUCCESS] Zero TypeScript errors detected!
-  echo [SUCCESS] Production build completed with EXIT CODE 0!
+  echo [SUCCESS] dist\index.html exists and is ready for Vercel deployment!
 ) else (
-  echo [WARNING] dist/ directory not found.
+  echo [WARNING] dist\index.html was not found. Please verify output.
 )
 
 echo.
-echo ============================================================
-echo   Build verification passed successfully!
-echo ============================================================
+echo ======================================================================
+echo   ALL CHECKS PASSED: Ready for Vercel Deployment!
+echo ======================================================================
 pause
-
