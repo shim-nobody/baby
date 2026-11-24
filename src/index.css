@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  html, body, #root {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #0B1026;
+    color: #FFF6EE;
+    font-family: 'DM Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* ── Typography and atmospheric backgrounds ── */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #FFF6EE 0%, #E8C88D 50%, #F4B8A4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-rose-gradient {
+  background: linear-gradient(135deg, #FFF6EE 0%, #D98FA8 50%, #E8C88D 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Glassmorphic Panels with Luxury Velvet/Ambiance ── */
+.glass-cinematic {
+  background: rgba(11, 16, 38, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(232, 200, 141, 0.22);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 30px rgba(52, 36, 84, 0.35);
+}
+
+.glass-parchment {
+  background: linear-gradient(165deg, #FFFDF9 0%, #FFF8F0 50%, #F6ECDF 100%);
+  border: 1.5px solid rgba(232, 200, 141, 0.6);
+  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8), 0 0 40px rgba(232, 200, 141, 0.25);
+}
+
+/* ── Water Stream & Waterfall Animations ── */
+@keyframes waterFlow {
+  0% { transform: translateY(0); opacity: 0.6; }
+  50% { opacity: 0.95; }
+  100% { transform: translateY(12px); opacity: 0.6; }
+}
+.animate-waterfall {
+  animation: waterFlow 1.2s ease-in-out infinite alternate;
+}
+
+/* ── Petal Drifting Animations ── */
+@keyframes petalDrift {
+  0% {
+    transform: translateY(-20px) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  15% { opacity: 0.85; }
+  85% { opacity: 0.85; }
+  100% {
+    transform: translateY(105vh) translateX(120px) rotate(420deg);
+    opacity: 0;
+  }
+}
+.animate-petal {
+  animation: petalDrift var(--dur, 10s) var(--delay, 0s) linear infinite;
+}
+
+/* ── Scrollbars ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(11, 16, 38, 0.5);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(232, 200, 141, 0.35);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(232, 200, 141, 0.6);
+}
