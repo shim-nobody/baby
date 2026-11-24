@@ -1,13 +1,13 @@
 // src/config/photos.ts — Romantic Memory Constellation Configuration
 // Featuring real couple memories of Shim (Captain) & Saba (Chubby)
 
-import photo1 from 'C:/Users/Admin/.gemini/antigravity/brain/71066aa7-597d-4cb8-8a4e-ceb421e21784/.user_uploaded/media_1795478808485_b149649f.png';
-import photo2 from 'C:/Users/Admin/.gemini/antigravity/brain/71066aa7-597d-4cb8-8a4e-ceb421e21784/.user_uploaded/media_1795478808520_09d9ef00.jpg';
-import photo3 from 'C:/Users/Admin/.gemini/antigravity/brain/71066aa7-597d-4cb8-8a4e-ceb421e21784/.user_uploaded/media_1795478808520_a14946c0.jpg';
-import photo4 from 'C:/Users/Admin/.gemini/antigravity/brain/71066aa7-597d-4cb8-8a4e-ceb421e21784/.user_uploaded/media_1795478808546_96406387.jpg';
-import photo5 from 'C:/Users/Admin/.gemini/antigravity/brain/71066aa7-597d-4cb8-8a4e-ceb421e21784/.user_uploaded/media_1795478808566_dabdc03f.jpg';
-import photo6 from 'C:/Users/Admin/.gemini/antigravity/brain/71066aa7-597d-4cb8-8a4e-ceb421e21784/.user_uploaded/media_1795478808587_a80f2c89.jpg';
-import photo7 from 'C:/Users/Admin/.gemini/antigravity/brain/71066aa7-597d-4cb8-8a4e-ceb421e21784/.user_uploaded/media_1795478808629_981aa994.jpg';
+import photo1 from '../assets/photos/photo1.png';
+import photo2 from '../assets/photos/photo2.jpg';
+import photo3 from '../assets/photos/photo3.jpg';
+import photo4 from '../assets/photos/photo4.jpg';
+import photo5 from '../assets/photos/photo5.jpg';
+import photo6 from '../assets/photos/photo6.jpg';
+import photo7 from '../assets/photos/photo7.jpg';
 
 export interface PhotoEntry {
   id: number;
